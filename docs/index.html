@@ -8,54 +8,62 @@
 <style>
 :root{--radius:16px;--bg:#fff;--text:#111;--muted:#555;--panel:#f7f7f7;--accent:#000;}
 *{box-sizing:border-box;font-family:'Montserrat',sans-serif;scroll-behavior:smooth;}
+html{scroll-padding-top:90px;}
 body{margin:0;background:var(--bg);color:var(--text);}
+/* ===== Header ===== */
 header{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-bottom:1px solid #ddd;z-index:10;}
 .container{max-width:1200px;margin:auto;padding:16px 24px;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;}
 .logo{width:44px;height:44px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;font-weight:700;cursor:pointer;}
 nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
-nav a{color:var(--text);font-weight:500;text-decoration:none;}
+nav a{color:var(--text);font-weight:500;text-decoration:none;transition:.2s;}
+nav a:hover{color:var(--muted);}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
 .burger div{width:26px;height:2.5px;background:var(--text);transition:.3s;}
 .burger.open div:nth-child(1){transform:translateY(7px) rotate(45deg);} .burger.open div:nth-child(2){opacity:0;} .burger.open div:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-@media(max-width:768px){nav ul{display:none;flex-direction:column;position:absolute;right:24px;top:72px;background:rgba(255,255,255,0.95);border-radius:var(--radius);padding:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}nav ul.show{display:flex;}.burger{display:flex;}}
-
-/* Карусель */
-.carousel{border-radius:var(--radius);overflow:hidden;margin-top:100px;position:relative;}
-.carousel-track{display:flex;transition:transform 1s ease;}
-.slide{min-width:100%;aspect-ratio:16/9;}
-.slide img{width:100%;height:100%;object-fit:cover;}
+@media(max-width:768px){nav ul{display:none;flex-direction:column;position:absolute;right:24px;top:72px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:var(--radius);padding:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}nav ul.show{display:flex;}.burger{display:flex;}}
+/* ===== Hero carousel ===== */
+.carousel{border-radius:var(--radius);overflow:hidden;margin-top:100px;position:relative;height:240px;}
+.carousel-track{display:flex;transition:transform 0.8s ease;}
+.slide{min-width:100%;}
+.slide img{width:100%;height:240px;object-fit:cover;display:block;}
 .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:8px;}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.6);cursor:pointer;transition:background .3s;}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.55);cursor:pointer;transition:background .25s;}
 .dot.active{background:#fff;}
-
+/* ===== Commons ===== */
 .section{margin-top:40px;}
-h2{font-weight:600;}
+h2{font-weight:600;margin:0 0 16px;}
 .btn{display:inline-block;margin-top:10px;padding:10px 20px;border:none;border-radius:999px;background:#000;color:#fff;font-weight:600;cursor:pointer;text-decoration:none;float:right;}
-
-/* --- Послуги Desktop --- */
-.services-desktop{display:flex;gap:32px;}
-.service-menu{flex:1;display:flex;flex-direction:column;gap:8px;}
-.service-menu button{background:none;border:none;padding:10px 16px;text-align:left;cursor:pointer;font-weight:500;color:var(--text);border-left:3px solid transparent;transition:.3s;}
-.service-menu button.active{color:#000;border-left:3px solid #000;font-weight:600;}
-.service-content{flex:3;padding:10px;animation:fadeIn .6s ease;}
-.service-content img{width:100%;border-radius:var(--radius);margin-bottom:10px;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-/* --- Послуги Mobile --- */
+/* ===== Services (Desktop) ===== */
+.services-desktop{display:flex;gap:24px;background:var(--panel);padding:24px;border-radius:var(--radius);align-items:flex-start;border:1px solid #ddd;}
+.service-menu{flex:1;display:flex;flex-direction:column;gap:12px;}
+.service-btn{background:var(--bg);border:1px solid #ddd;border-radius:var(--radius);padding:12px 14px;text-align:left;cursor:pointer;font-weight:600;font-size:18px;color:var(--text);display:flex;align-items:center;gap:10px;transition:.25s;}
+.service-btn:hover{box-shadow:0 2px 8px rgba(0,0,0,.06);} 
+.service-btn svg{width:22px;height:22px;fill:var(--text);flex:0 0 22px;}
+.service-btn.active{background:#000;color:#fff;border-color:#000;}
+.service-btn.active svg{fill:#fff;}
+.service-content{flex:3;padding:10px;animation:fadeIn .4s ease;display:flex;flex-direction:column;align-items:flex-start;}
+.image-box{width:100%;height:300px;border-radius:var(--radius);overflow:hidden;border:1px solid #ddd;background:#fff;margin-bottom:10px;}
+.image-box img{width:100%;height:100%;object-fit:cover;display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+/* ===== Services (Mobile) ===== */
 @media(max-width:900px){.services-desktop{display:none;}.services-mobile{display:block;}}
 @media(min-width:901px){.services-mobile{display:none;}}
-.service-card{margin-bottom:16px;border-radius:var(--radius);background:var(--panel);padding:16px;border:1px solid #ddd;}
-summary{cursor:pointer;font-weight:600;}
-
-/* --- Переваги --- */
+.service-card{margin-bottom:16px;border-radius:var(--radius);background:var(--panel);padding:12px 16px;border:1px solid #ddd;overflow:hidden;}
+.service-card summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;list-style:none;}
+.service-card summary::-webkit-details-marker{display:none;}
+.service-card .heading{display:flex;align-items:center;gap:8px;}
+.service-card .heading svg{width:22px;height:22px;fill:var(--text);} 
+.service-card .arrow{margin-left:12px;transform:rotate(0deg);transition:transform .25s;}
+.service-card[open] .arrow{transform:rotate(90deg);} 
+.service-card .content{padding-top:12px;}
+.service-card .content img{width:100%;height:auto;display:block;border-radius:var(--radius);border:1px solid #ddd;}
+/* ===== Benefits / Contacts ===== */
 #benefits{background:#f0f0f0;width:100%;margin-top:60px;padding:40px 0;}
 #benefits .container{max-width:1200px;margin:auto;padding:0 24px;}
 .benefits{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
 .benefit-card{background:#fff;border:1px solid #ddd;border-radius:var(--radius);padding:18px;}
-
-/* --- Контакти --- */
-.map-container{margin-top:20px;border-radius:var(--radius);overflow:hidden;}
+.map-container{margin-top:20px;border-radius:var(--radius);overflow:hidden;border:1px solid #ddd;}
 iframe{width:100%;height:450px;border:0;}
 footer{margin-top:40px;background:#000;color:#fff;text-align:center;padding:20px;}
 </style>
@@ -82,42 +90,96 @@ footer{margin-top:40px;background:#000;color:#fff;text-align:center;padding:20px
 </header>
 
 <main class="container">
+  <!-- ===== HERO ===== -->
   <section id="hero" class="carousel">
     <div class="carousel-track" id="track">
-      <div class="slide"><img src="https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1920&auto=format&fit=crop"></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1526546341293-349ef6a39c85?q=80&w=1920&auto=format&fit=crop"></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920&auto=format&fit=crop"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1920&auto=format&fit=crop" alt="Будівля 1"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1526546341293-349ef6a39c85?q=80&w=1920&auto=format&fit=crop" alt="Будівля 2"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1920&auto=format&fit=crop" alt="Будівля 3"></div>
     </div>
     <div class="dots" id="dots"></div>
   </section>
 
+  <!-- ===== SERVICES ===== -->
   <section id="services" class="section">
     <h2>Послуги</h2>
+    <!-- Desktop variant -->
     <div class="services-desktop">
-      <div class="service-menu">
-        <button class="active" data-service="s1">Ескізне проектування</button>
-        <button data-service="s2">Дозвільні документи</button>
-        <button data-service="s3">Детальні плани території</button>
-        <button data-service="s4">Технічна інвентаризація</button>
-        <button data-service="s5">Паспорти тимчасових споруд</button>
+      <div class="service-menu" id="serviceMenu">
+        <button class="service-btn active" data-service="s1" type="button" aria-pressed="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h2v-2H3v2zm4 0h2v-2H7v2zm4 0h10v-2H11v2z"/></svg>
+          Ескізне проектування
+        </button>
+        <button class="service-btn" data-service="s2" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v2H5v-2zm0 4h14v2H5V8zm0 4h10v2H5v-2z"/></svg>
+          Дозвільні документи
+        </button>
+        <button class="service-btn" data-service="s3" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6z"/></svg>
+          Детальні плани території
+        </button>
+        <button class="service-btn" data-service="s4" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3V3z"/></svg>
+          Технічна інвентаризація
+        </button>
+        <button class="service-btn" data-service="s5" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h12v2H4v-2z"/></svg>
+          Паспорти тимчасових споруд
+        </button>
       </div>
-      <div class="service-content" id="service-content">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200">
+      <div class="service-content" id="serviceContent">
+        <div class="image-box"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200" alt="Ескізне проектування"></div>
         <p>Ми створюємо концепції, що поєднують функціональність і естетику. Враховуємо вимоги замовника, умови ділянки та норми.</p>
         <a href="#contacts" class="btn">Замовити</a>
       </div>
     </div>
-
+    <!-- Mobile variant -->
     <div class="services-mobile">
-      <details class="service-card"><summary>Ескізне проектування</summary><div><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200"><p>Ми створюємо концепції, що поєднують функціональність і естетику.</p><a href="#contacts" class="btn">Замовити</a></div></details>
-      <details class="service-card"><summary>Дозвільні документи</summary><div><img src="https://images.unsplash.com/photo-1571171637578-041cfb9b4ede?w=1200"><p>Ми готуємо повний пакет документів для отримання дозволів.</p><a href="#contacts" class="btn">Замовити</a></div></details>
-      <details class="service-card"><summary>Детальні плани території</summary><div><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200"><p>Планування територій з урахуванням функціонального зонування.</p><a href="#contacts" class="btn">Замовити</a></div></details>
-      <details class="service-card"><summary>Технічна інвентаризація</summary><div><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200"><p>Здійснюємо технічну інвентаризацію, визначення площ, поверховості, стану конструкцій.</p><a href="#contacts" class="btn">Замовити</a></div></details>
-      <details class="service-card"><summary>Паспорти тимчасових споруд</summary><div><img src="https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=1200"><p>Розробка паспортів прив’язки для тимчасових споруд з усіма графічними матеріалами.</p><a href="#contacts" class="btn">Замовити</a></div></details>
+      <details class="service-card">
+        <summary><span class="heading"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm4 0h2v-2H7v2zm4 0h10v-2H11v2z"/></svg>Ескізне проектування</span><span class="arrow">▸</span></summary>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200" alt="Ескізне проектування">
+          <p>Ми створюємо концепції, що поєднують функціональність і естетику.</p>
+          <a href="#contacts" class="btn">Замовити</a>
+        </div>
+      </details>
+      <details class="service-card">
+        <summary><span class="heading"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5v-2zm0 4h14v2H5V8zm0 4h10v2H5v-2z"/></svg>Дозвільні документи</span><span class="arrow">▸</span></summary>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1571171637578-041cfb9b4ede?w=1200" alt="Дозвільні документи">
+          <p>Ми готуємо повний пакет документів для отримання дозволів.</p>
+          <a href="#contacts" class="btn">Замовити</a>
+        </div>
+      </details>
+      <details class="service-card">
+        <summary><span class="heading"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6z"/></svg>Детальні плани території</span><span class="arrow">▸</span></summary>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200" alt="Детальні плани території">
+          <p>Планування територій з урахуванням функціонального зонування.</p>
+          <a href="#contacts" class="btn">Замовити</a>
+        </div>
+      </details>
+      <details class="service-card">
+        <summary><span class="heading"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3z"/></svg>Технічна інвентаризація</span><span class="arrow">▸</span></summary>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200" alt="Технічна інвентаризація">
+          <p>Здійснюємо технічну інвентаризацію, визначення площ, поверховості, стану конструкцій.</p>
+          <a href="#contacts" class="btn">Замовити</a>
+        </div>
+      </details>
+      <details class="service-card">
+        <summary><span class="heading"><svg viewBox="0 0 24 24"><path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h12v2H4v-2z"/></svg>Паспорти тимчасових споруд</span><span class="arrow">▸</span></summary>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=1200" alt="Паспорти тимчасових споруд">
+          <p>Розробка паспортів прив’язки для тимчасових споруд з усіма графічними матеріалами.</p>
+          <a href="#contacts" class="btn">Замовити</a>
+        </div>
+      </details>
     </div>
   </section>
 </main>
 
+<!-- ===== BENEFITS ===== -->
 <section id="benefits">
   <div class="container">
     <h2>Переваги</h2>
@@ -128,6 +190,7 @@ footer{margin-top:40px;background:#000;color:#fff;text-align:center;padding:20px
   </div>
 </section>
 
+<!-- ===== CONTACTS ===== -->
 <section id="contacts" class="section container">
   <h2>Контакти</h2>
   <ul style="list-style:none;padding:0;">
@@ -136,29 +199,49 @@ footer{margin-top:40px;background:#000;color:#fff;text-align:center;padding:20px
     <li>Адреса: м. Київ, вул. Архітекторів, 10</li>
   </ul>
   <div class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!4v1761761269785!6m8!1m7!1sIkomAra9EaavdwCaGqTo7Q!2m2!1d49.44208803079861!2d32.06338141598312!3f93.63859264353765!4f-0.055883241678841955!5f1.1924812503605782" allowfullscreen loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1761761269785!6m8!1m7!1sIkomAra9EaavdwCaGqTo7Q!2m2!1d49.44208803079861!2d32.06338141598312!3f93.63859264353765!4f-0.055883241678841955!5f1.1924812503605782" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
 <footer>© <span id="year"></span> ARCHIBUREAU. Усі права захищено.</footer>
 
 <script>
-// Карусель із крапками
-let index=0;
-const track=document.getElementById('track');
-const slides=track.children;
-const dotsContainer=document.getElementById('dots');
-for(let i=0;i<slides.length;i++){const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.addEventListener('click',()=>{index=i;updateCarousel();});dotsContainer.appendChild(dot);} const dots=document.querySelectorAll('.dot');
-function updateCarousel(){track.style.transform=`translateX(-${index*100}%)`;dots.forEach((d,i)=>d.classList.toggle('active',i===index));}
-setInterval(()=>{index=(index+1)%slides.length;updateCarousel();},5000);
-
-// Послуги контент
-const services={s1:{img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200',text:'Ми створюємо концепції, що поєднують функціональність і естетику.'},s2:{img:'https://images.unsplash.com/photo-1571171637578-041cfb9b4ede?w=1200',text:'Ми готуємо повний пакет документів для отримання дозволів.'},s3:{img:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200',text:'Планування територій з урахуванням функціонального зонування.'},s4:{img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200',text:'Здійснюємо технічну інвентаризацію, визначення площ, поверховості, стану конструкцій.'},s5:{img:'https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=1200',text:'Розробка паспортів прив’язки для тимчасових споруд з усіма графічними матеріалами.'}};
-const menuBtns=document.querySelectorAll('.service-menu button');const content=document.getElementById('service-content');
-menuBtns.forEach(btn=>btn.onclick=()=>{menuBtns.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const s=services[btn.dataset.service];content.innerHTML=`<img src="${s.img}"><p>${s.text}</p><a href='#contacts' class='btn'>Замовити</a>`;});
-
+// ===== Carousel =====
+(function(){
+  const track=document.getElementById('track');
+  const slides=track.children; let index=0; const dotsContainer=document.getElementById('dots');
+  for(let i=0;i<slides.length;i++){const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.addEventListener('click',()=>{index=i;update();});dotsContainer.appendChild(dot);} 
+  const dots=[...dotsContainer.children];
+  function update(){track.style.transform=`translateX(-${index*100}%)`;dots.forEach((d,i)=>d.classList.toggle('active',i===index));}
+  setInterval(()=>{index=(index+1)%slides.length;update();},5000);
+})();
+// ===== Desktop services toggle =====
+(function(){
+  const contentMap={
+    s1:{img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200',text:'Ми створюємо концепції, що поєднують функціональність і естетику. Враховуємо вимоги замовника, умови ділянки та норми.'},
+    s2:{img:'https://images.unsplash.com/photo-1571171637578-041cfb9b4ede?w=1200',text:'Ми готуємо повний пакет документів для отримання дозволів та супровід на всіх етапах.'},
+    s3:{img:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200',text:'Планування територій з урахуванням функціонального зонування, транспорту та благоустрою.'},
+    s4:{img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200',text:'Інвентаризація, обміри, визначення площ, поверховості та технічного стану.'},
+    s5:{img:'https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=1200',text:'Паспорти прив’язки тимчасових споруд із графічними матеріалами.'}
+  };
+  const menu=document.getElementById('serviceMenu');
+  const content=document.getElementById('serviceContent');
+  menu.addEventListener('click',e=>{
+    const btn=e.target.closest('.service-btn'); if(!btn) return;
+    [...menu.querySelectorAll('.service-btn')].forEach(b=>{b.classList.toggle('active',b===btn); b.setAttribute('aria-pressed', b===btn ? 'true' : 'false');});
+    const data=contentMap[btn.dataset.service];
+    if(!data) return;
+    content.innerHTML=`<div class="image-box"><img src="${data.img}" alt=""></div><p>${data.text}</p><a href="#contacts" class="btn">Замовити</a>`;
+  });
+})();
+// ===== Header year =====
 document.getElementById('year').textContent=new Date().getFullYear();
+// ===== Burger =====
+(function(){
+  const burger=document.getElementById('burger'); const menu=document.getElementById('menu');
+  burger.addEventListener('click',e=>{e.stopPropagation();burger.classList.toggle('open');menu.classList.toggle('show');});
+  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&!burger.contains(e.target)){menu.classList.remove('show');burger.classList.remove('open');}});
+})();
 </script>
 </body>
 </html>
-
